@@ -4,7 +4,6 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
-import mongoSanitize from "express-mongo-sanitize";
 
 import connectDB from "./config/database.js";
 
@@ -32,9 +31,7 @@ function checkRequiredEnvVars() {
     "FRONTEND_URL",
   ];
 
-  const missing = required.filter(
-    (key) => !process.env[key]
-  );
+  const missing = required.filter((key) => !process.env[key]);
 
   if (missing.length > 0) {
     console.error("======================================");
@@ -87,10 +84,8 @@ app.use(
   })
 );
 
-app.use(mongoSanitize());
-
+// Body Parser
 app.use(express.json({ limit: "10kb" }));
-
 app.use(
   express.urlencoded({
     extended: true,
@@ -191,7 +186,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log("======================================");
   console.log("🚀 Startup CRM Lite Backend Started");
   console.log(`🌐 Server : http://localhost:${PORT}`);
