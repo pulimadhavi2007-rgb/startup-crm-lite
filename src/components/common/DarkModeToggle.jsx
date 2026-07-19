@@ -5,43 +5,53 @@ const DarkModeToggle = () => {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="
-        relative
-        flex
-        items-center
-        justify-center
-        w-11
-        h-11
-        rounded-xl
-        border
-        border-gray-200
-        dark:border-gray-700
-        bg-white
-        dark:bg-gray-800
-        text-gray-700
-        dark:text-yellow-400
-        hover:scale-105
-        transition-all
-        duration-200
-        shadow-sm
-      "
-      aria-label="Toggle Theme"
-      title={isDarkMode ? "Light Mode" : "Dark Mode"}
-    >
-      {isDarkMode ? (
-        <Sun
-          size={20}
-          className="transition-transform duration-300 rotate-0"
-        />
-      ) : (
-        <Moon
-          size={20}
-          className="transition-transform duration-300 rotate-0"
-        />
-      )}
-    </button>
+    <div className="flex items-center gap-3">
+      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        {isDarkMode ? "Dark" : "Light"}
+      </span>
+
+      <button
+        onClick={toggleTheme}
+        aria-label="Toggle Theme"
+        className="
+          relative
+          flex
+          items-center
+          w-14
+          h-8
+          rounded-full
+          bg-gray-300
+          dark:bg-blue-600
+          transition-all
+          duration-300
+          focus:outline-none
+          shadow-inner
+        "
+      >
+        <span
+          className={`
+            absolute
+            flex
+            items-center
+            justify-center
+            w-6
+            h-6
+            bg-white
+            rounded-full
+            shadow-md
+            transition-all
+            duration-300
+            ${
+              isDarkMode
+                ? "translate-x-7 text-yellow-500"
+                : "translate-x-1 text-gray-700"
+            }
+          `}
+        >
+          {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
+        </span>
+      </button>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
+import React, { memo } from "react";
 import { TrendingUp } from "lucide-react";
 
-export default function StatsCard({
+function StatsCard({
   title,
   value,
   icon: Icon,
@@ -8,43 +9,105 @@ export default function StatsCard({
   color,
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-all duration-300">
+    <div
+      className="
+        rounded-2xl
+        border
+        border-gray-200
+        dark:border-gray-700
+        bg-white
+        dark:bg-gray-800
+        p-5
+        shadow-sm
+        hover:shadow-lg
+        transition-all
+        duration-300
+      "
+    >
+      {/* Top Section */}
 
       <div className="flex items-center justify-between">
 
-        <div>
-          <p className="text-sm text-gray-500">
+        <div className="min-w-0">
+
+          <p
+            className="
+              text-sm
+              font-medium
+              text-gray-500
+              dark:text-gray-400
+            "
+          >
             {title}
           </p>
 
-          <h2 className="text-3xl font-bold mt-2 text-gray-900">
+          <h2
+            className="
+              mt-2
+              text-2xl
+              sm:text-3xl
+              font-bold
+              text-gray-900
+              dark:text-white
+              break-words
+            "
+          >
             {value}
           </h2>
+
         </div>
 
-        <div className={`${color} p-4 rounded-xl text-white shadow`}>
+        <div
+          className={`
+            ${color}
+            flex
+            h-14
+            w-14
+            items-center
+            justify-center
+            rounded-xl
+            text-white
+            shadow-md
+            shrink-0
+          `}
+        >
           <Icon size={28} />
         </div>
 
       </div>
 
-      <div className="flex items-center gap-2 mt-5">
+      {/* Bottom Section */}
+
+      <div className="mt-5 flex items-center gap-2">
 
         <TrendingUp
           size={16}
           className="text-green-500"
         />
 
-        <span className="text-green-600 font-semibold">
+        <span
+          className="
+            font-semibold
+            text-green-600
+            dark:text-green-400
+          "
+        >
           {change}
         </span>
 
-        <span className="text-gray-500 text-sm">
+        <span
+          className="
+            text-sm
+            text-gray-500
+            dark:text-gray-400
+          "
+        >
           vs last month
         </span>
 
       </div>
-
     </div>
   );
 }
+
+export default memo(StatsCard);

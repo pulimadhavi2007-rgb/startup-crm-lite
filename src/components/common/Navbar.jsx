@@ -5,21 +5,11 @@ const Navbar = ({ onMenuClick }) => {
   return (
     <header
       className="
-        sticky
-        top-0
-        z-30
-        flex
-        items-center
-        justify-between
-        h-16
-        px-6
-        bg-white
-        dark:bg-gray-800
-        border-b
-        border-gray-200
-        dark:border-gray-700
-        transition-colors
-        duration-200
+        flex items-center justify-between
+        px-6 py-4
+        bg-white dark:bg-gray-800
+        border-b border-gray-200 dark:border-gray-700
+        transition-colors duration-200
       "
     >
       {/* Left Section */}
@@ -32,7 +22,7 @@ const Navbar = ({ onMenuClick }) => {
             rounded-lg
             hover:bg-gray-100
             dark:hover:bg-gray-700
-            transition-colors
+            transition-colors duration-200
           "
         >
           <Menu
@@ -55,7 +45,7 @@ const Navbar = ({ onMenuClick }) => {
             rounded-lg
             hover:bg-gray-100
             dark:hover:bg-gray-700
-            transition-colors
+            transition-colors duration-200
           "
         >
           <Bell

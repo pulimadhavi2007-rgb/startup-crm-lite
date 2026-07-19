@@ -15,7 +15,6 @@ import ActivityHeatmap from "../components/analytics/ActivityHeatmap";
 import TopPerformersCard from "../components/analytics/TopPerformersCard";
 import ForecastCard from "../components/analytics/ForecastCard";
 import SalesVelocityCard from "../components/analytics/SalesVelocityCard";
-
 import EmptyAnalyticsState from "../components/analytics/EmptyAnalyticsState";
 
 export default function Analytics() {
@@ -26,6 +25,7 @@ export default function Analytics() {
   const filteredLeads = useMemo(() => {
     if (!leads.length) return [];
 
+    // Add filtering logic here if needed
     return leads;
   }, [leads, filter]);
 
@@ -33,7 +33,7 @@ export default function Analytics() {
 
   if (!filteredLeads.length) {
     return (
-      <div className="p-8">
+      <div className="flex min-h-[70vh] items-center justify-center">
         <EmptyAnalyticsState />
       </div>
     );
@@ -42,14 +42,17 @@ export default function Analytics() {
   return (
     <div className="space-y-6">
 
+      {/* Filters */}
       <AnalyticsFilters
         selectedFilter={filter}
         onFilterChange={setFilter}
       />
 
+      {/* Statistics */}
       <StatsCards analytics={analytics} />
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      {/* Charts */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
         <PieChartCard analytics={analytics} />
         <FunnelChartCard analytics={analytics} />

@@ -8,16 +8,28 @@ import "./index.css";
 
 import { AuthProvider } from "./context/AuthContext";
 import { LeadProvider } from "./context/LeadContext";
+import { ThemeProvider } from "./context/ThemeContext";
+
+// Apply saved theme before rendering
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+  document.documentElement.classList.add("dark");
+} else {
+  document.documentElement.classList.remove("dark");
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <LeadProvider>
-          <App />
-          <Toaster position="top-right" />
-        </LeadProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <LeadProvider>
+            <App />
+            <Toaster position="top-right" />
+          </LeadProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

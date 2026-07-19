@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   ResponsiveContainer,
   PieChart,
@@ -17,43 +17,65 @@ const COLORS = [
   "#06B6D4",
 ];
 
-export default function PieChartCard({ analytics }) {
+function PieChartCard({ analytics }) {
   const data = analytics?.statusDistribution || [];
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 h-[420px]">
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+
+      {/* Header */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
           Lead Status Distribution
         </h2>
 
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           Distribution of leads by status
         </p>
       </div>
 
-      <ResponsiveContainer width="100%" height="85%">
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="name"
-            outerRadius={120}
-            label
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={index}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
+      {/* Chart */}
+      <div className="h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              outerRadius={110}
+              label
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={index}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
 
-          <Tooltip />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1F2937",
+                border: "none",
+                borderRadius: "10px",
+                color: "#ffffff",
+              }}
+              labelStyle={{
+                color: "#ffffff",
+              }}
+            />
 
-          <Legend />
-        </PieChart>
-      </ResponsiveContainer>
+            <Legend
+              wrapperStyle={{
+                color: "#9CA3AF",
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+
     </div>
   );
 }
+
+export default memo(PieChartCard);

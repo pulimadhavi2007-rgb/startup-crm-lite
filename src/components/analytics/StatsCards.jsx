@@ -43,21 +43,33 @@ export default function StatsCards({ analytics }) {
         return (
           <div
             key={card.title}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-lg"
+            className="
+              rounded-2xl
+              border
+              border-gray-200
+              dark:border-gray-700
+              bg-white
+              dark:bg-gray-800
+              p-6
+              shadow-sm
+              hover:shadow-lg
+              transition-all
+              duration-200
+            "
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   {card.title}
                 </p>
 
-                <h2 className="mt-3 text-3xl font-bold text-slate-900">
+                <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
                   {card.value}
                 </h2>
               </div>
 
               <div
-                className={`${card.color} rounded-xl p-4 text-white`}
+                className={`${card.color} rounded-xl p-4 text-white shadow`}
               >
                 <Icon size={24} />
               </div>

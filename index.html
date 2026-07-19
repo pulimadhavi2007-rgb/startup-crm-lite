@@ -10,18 +10,13 @@
       content="width=device-width, initial-scale=1.0"
     />
 
+    <!-- Prevent Flash of Wrong Theme -->
     <script>
       (() => {
-        try {
-          const isDark = JSON.parse(
-            localStorage.getItem("startup-crm-theme")
-          );
+        const theme = localStorage.getItem("theme");
 
-          if (isDark) {
-            document.documentElement.classList.add("dark");
-          }
-        } catch (error) {
-          console.error(error);
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
         }
       })();
     </script>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -9,52 +9,86 @@ import {
   Tooltip,
 } from "recharts";
 
-export default function RevenueChartCard({ analytics }) {
+function RevenueChartCard({ analytics }) {
   const data = analytics?.revenueTrend || [];
 
   return (
-    <div className="rounded-2xl bg-[#111827] border border-slate-800 p-6 shadow-lg h-[420px]">
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+
+      {/* Header */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
           Revenue Trend
         </h2>
 
-        <p className="text-slate-400 text-sm">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           Monthly revenue growth
         </p>
       </div>
 
-      <ResponsiveContainer width="100%" height="82%">
-        <AreaChart data={data}>
-          <defs>
-            <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#22C55E" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#22C55E" stopOpacity={0} />
-            </linearGradient>
-          </defs>
+      {/* Chart */}
+      <div className="h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart data={data}>
+            <defs>
+              <linearGradient
+                id="revenueGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  offset="5%"
+                  stopColor="#22C55E"
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="95%"
+                  stopColor="#22C55E"
+                  stopOpacity={0}
+                />
+              </linearGradient>
+            </defs>
 
-          <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="#E5E7EB"
+            />
 
-          <XAxis dataKey="month" stroke="#94A3B8" />
-          <YAxis stroke="#94A3B8" />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+            />
 
-          <Tooltip
-            contentStyle={{
-              background: "#1E293B",
-              border: "none",
-              borderRadius: 10,
-            }}
-          />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+            />
 
-          <Area
-            type="monotone"
-            dataKey="revenue"
-            stroke="#22C55E"
-            fill="url(#revenueGradient)"
-            strokeWidth={3}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1F2937",
+                border: "none",
+                borderRadius: "10px",
+                color: "#fff",
+              }}
+            />
+
+            <Area
+              type="monotone"
+              dataKey="revenue"
+              stroke="#22C55E"
+              fill="url(#revenueGradient)"
+              strokeWidth={3}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+
     </div>
   );
 }
+
+export default memo(RevenueChartCard);
