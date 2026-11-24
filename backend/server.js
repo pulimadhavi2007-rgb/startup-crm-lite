@@ -48,7 +48,6 @@ checkRequiredEnvVars();
 // ======================================
 // Connect Database
 // ======================================
-connectDB();
 
 // ======================================
 // Initialize Express
@@ -185,15 +184,29 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log("======================================");
-  console.log("🚀 Startup CRM Lite Backend Started");
-  console.log(`🌐 Server : http://localhost:${PORT}`);
-  console.log(
-    `🌍 Environment : ${process.env.NODE_ENV || "development"}`
-  );
-  console.log("======================================");
-});
+let server;
+
+const startServer = async () => {
+  try {
+    // Connect MongoDB first
+    await connectDB();
+
+    // Start Express server
+    server = app.listen(PORT, "0.0.0.0", () => {
+      console.log("======================================");
+      console.log("🚀 Startup CRM Lite Backend Started");
+      console.log(`🌐 Server running on port ${PORT}`);
+      console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+      console.log("======================================");
+    });
+
+  } catch (error) {
+    console.error("Server startup failed:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
 
 // ======================================
 // Graceful Shutdown
