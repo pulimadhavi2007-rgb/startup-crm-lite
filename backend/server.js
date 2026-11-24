@@ -25,7 +25,6 @@ dotenv.config();
 // ======================================
 function checkRequiredEnvVars() {
   const required = [
-    "PORT",
     "MONGODB_URI",
     "JWT_SECRET",
     "FRONTEND_URL",
@@ -64,7 +63,7 @@ app.use(helmet());
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  "https://your-app.vercel.app",
+  "https://startup-crm-lite-puce.vercel.app",
 ];
 
 app.use(
